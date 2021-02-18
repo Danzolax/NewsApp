@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">MVVMNewsApp</string>
+    <string name="error_no_internet_connection">Отсутствует интернет соединение</string>
+    <string name="error_network_failure">Ошибка соединения с сервером</string>
+    <string name="error_conversion_failure">Ошибка отображения новостей</string>
+
+    <array name="a">
+        <item name="category_business">Бизнес</item>
+        <item name="category_entertainment">Развлечения</item>
+        <item name="category_health">Здоровье</item>
+        <item name="category_science">Наука</item>
+        <item name="category_sports">Спорт</item>
+        <item name="category_tech">Технологии</item>
+    </array>
 </resources>

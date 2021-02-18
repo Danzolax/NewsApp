@@ -18,7 +18,8 @@ data class Article(
     val source: Source?,
     val title: String?,
     val url: String?,
-    val urlToImage: String?
+    val urlToImage: String?,
+    val category: String = ""
 ) : Serializable {
     override fun toString(): String {
         return "$author - $title"

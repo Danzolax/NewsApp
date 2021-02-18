@@ -14,6 +14,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.androiddevs.mvvmnewsapp.NewsApplication
+import com.androiddevs.mvvmnewsapp.R
 import com.androiddevs.mvvmnewsapp.models.Article
 import com.androiddevs.mvvmnewsapp.models.NewsResponse
 import com.androiddevs.mvvmnewsapp.repository.NewsRepository
@@ -27,6 +28,8 @@ class NewsViewModel @ViewModelInject constructor(
     app: Application,
     val newsRepository: NewsRepository
 ) : AndroidViewModel(app) {
+
+    private val app = getApplication<NewsApplication>()
 
     val breakingNews: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
 
@@ -83,12 +86,12 @@ class NewsViewModel @ViewModelInject constructor(
             if (hasInternetConnection()) {
                 action()
             } else {
-                Resource.Error("No internet connection")
+                Resource.Error(app.getString(R.string.error_no_internet_connection))
             }
         } catch (t: Throwable) {
             when (t) {
-                is IOException -> Resource.Error("Network failure")
-                else -> Resource.Error("Conversion error")
+                is IOException -> Resource.Error(app.getString(R.string.error_network_failure))
+                else -> Resource.Error(app.getString(R.string.error_conversion_failure))
             }
         }
     }
@@ -113,7 +116,7 @@ class NewsViewModel @ViewModelInject constructor(
     }
 
     private fun hasInternetConnection(): Boolean {
-        val connectivityManager = getApplication<NewsApplication>().getSystemService(
+        val connectivityManager = app.getSystemService(
             Context.CONNECTIVITY_SERVICE
         ) as ConnectivityManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

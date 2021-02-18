@@ -2,6 +2,7 @@ package com.androiddevs.mvvmnewsapp.di
 
 import android.content.Context
 import androidx.room.Room
+import com.androiddevs.mvvmnewsapp.adapters.CategoryViewPagerAdapter
 import com.androiddevs.mvvmnewsapp.adapters.NewsAdapter
 import com.androiddevs.mvvmnewsapp.api.NewsApi
 import com.androiddevs.mvvmnewsapp.db.ArticleDao
@@ -56,4 +57,10 @@ object AppModule {
     @Singleton
     @Provides
     fun provideNewsAdapter() = NewsAdapter()
+
+    @Singleton
+    @Provides
+    fun provideCategoryViewPagerAdapter(
+        newsAdapter: NewsAdapter
+    ) = CategoryViewPagerAdapter(newsAdapter)
 }

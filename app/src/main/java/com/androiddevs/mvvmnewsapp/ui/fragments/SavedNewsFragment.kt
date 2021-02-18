@@ -27,8 +27,6 @@ class SavedNewsFragment : Fragment(R.layout.fragment_saved_news) {
     @Inject
     lateinit var newsAdapter: NewsAdapter
 
-    val TAG = "SavedNewsFragment"
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
