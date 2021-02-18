@@ -4,6 +4,6 @@
     <item
         android:id="@+id/categoriesButton"
         android:icon="@drawable/ic_baseline_filter_alt_24"
-        android:title="Категория"
-        app:showAsAction="ifRoom" />
+        android:title=""
+        app:showAsAction="always" />
 </menu>
