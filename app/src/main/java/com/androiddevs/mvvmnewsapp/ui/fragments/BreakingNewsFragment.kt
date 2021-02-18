@@ -2,6 +2,8 @@ package com.androiddevs.mvvmnewsapp.ui.fragments
 
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
 import android.widget.AbsListView
 import android.widget.Toast
@@ -122,5 +124,9 @@ class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news) {
             addOnScrollListener(this@BreakingNewsFragment.scrollListener)
         }
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.action_bar_menu,menu)
     }
 }
