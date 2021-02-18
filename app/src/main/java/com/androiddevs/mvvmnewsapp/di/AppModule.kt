@@ -50,12 +50,12 @@ object AppModule {
         .addConverterFactory(GsonConverterFactory.create())
         .client(client)
         .build()
-
-    @Singleton
-    @Provides
-    fun provideApi(
-        retrofit: Retrofit
-    ) = retrofit.create(NewsApi::class.java)
+//
+//    @Singleton
+//    @Provides
+//    fun provideApi(
+//        retrofit: Retrofit
+//    ) = retrofit.create(NewsApi::class.java)
 
     @Singleton
     @Provides

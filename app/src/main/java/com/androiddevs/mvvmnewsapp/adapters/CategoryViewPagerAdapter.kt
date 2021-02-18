@@ -11,14 +11,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.androiddevs.mvvmnewsapp.R
 import com.androiddevs.mvvmnewsapp.models.Article
 import com.androiddevs.mvvmnewsapp.models.NewsResponse
+import com.google.android.material.snackbar.Snackbar
 import timber.log.Timber
 
 class CategoryViewPagerAdapter(
     val newsAdapter: NewsAdapter
-) :
-    RecyclerView.Adapter<CategoryViewPagerAdapter.CategoryViewHolder>() {
+) : RecyclerView.Adapter<CategoryViewPagerAdapter.CategoryViewHolder>() {
 
-    private val allArticles = MutableList<List<Article>>(6) { listOf() }
+    val allArticles = MutableList<List<Article>>(6) { listOf() }
 
     class CategoryViewHolder(itemView: View, newsAdapter: NewsAdapter) :
         RecyclerView.ViewHolder(itemView) {
@@ -56,8 +56,7 @@ class CategoryViewPagerAdapter(
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         val title = names[position]
         val articles = allArticles[position]
-        Timber.d(articles.toString())
-        newsAdapter.articles = articles
+        Timber.d("bind[$position] $title: $articles")
         holder.apply {
             name.text = title
         }
@@ -66,8 +65,6 @@ class CategoryViewPagerAdapter(
     override fun getItemCount(): Int {
         return names.size
     }
-
-    var listener: ((Article) -> Unit)? = null
 
     fun setBusinessArticles(newsResponse: NewsResponse) {
         allArticles[0] = newsResponse.articles

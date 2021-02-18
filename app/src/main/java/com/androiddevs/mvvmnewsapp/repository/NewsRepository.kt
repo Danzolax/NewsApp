@@ -1,14 +1,16 @@
 package com.androiddevs.mvvmnewsapp.repository
 
+import com.androiddevs.mvvmnewsapp.api.FakeNewsApi
 import com.androiddevs.mvvmnewsapp.api.NewsApi
 import com.androiddevs.mvvmnewsapp.db.ArticleDao
 import com.androiddevs.mvvmnewsapp.models.Article
 import javax.inject.Inject
 
 class NewsRepository @Inject constructor(
-    val dao: ArticleDao,
-    val api: NewsApi
+    val dao: ArticleDao
 ) {
+    val api: NewsApi = FakeNewsApi()
+
     suspend fun getBreakingNews(
         countryCode: String
     ) = api.getBreakingNews(countryCode)

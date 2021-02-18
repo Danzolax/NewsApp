@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.viewpager2.widget.ViewPager2
 import com.androiddevs.mvvmnewsapp.R
 import com.androiddevs.mvvmnewsapp.adapters.CategoryViewPagerAdapter
 import com.androiddevs.mvvmnewsapp.ui.NewsViewModel
@@ -28,6 +29,14 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         subscribeToObservers()
         viewPager.apply {
             adapter = categoryAdapter
+            val callback = object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                    categoryAdapter.newsAdapter.articles = categoryAdapter.allArticles[position]
+                    Timber.d("onPageSelected: $position")
+                }
+            }
+            registerOnPageChangeCallback(callback)
         }
         categoryAdapter.names = resources.getStringArray(R.array.a).toList()
         categoryAdapter.newsAdapter.setOnItemClickListener {
@@ -45,7 +54,6 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                     categoryAdapter.setBusinessArticles(newsResponse)
                 }
             }
-            Timber.d(it.toString())
         })
         viewModel.entertainmentNews.observe(viewLifecycleOwner, Observer {
             if (it is Resource.Success) {

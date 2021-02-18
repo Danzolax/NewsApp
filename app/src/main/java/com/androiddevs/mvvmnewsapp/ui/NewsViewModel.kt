@@ -69,6 +69,7 @@ class NewsViewModel @ViewModelInject constructor(
     ): Resource<NewsResponse> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
+                Timber.d("handleNewsResponse: $resultResponse")
                 return Resource.Success(resultResponse)
             }
             Timber.d(response.errorBody().toString())

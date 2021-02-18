@@ -41,6 +41,7 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
+        newsAdapter.articles = mutableListOf()
 
         newsAdapter.setOnItemClickListener {
             val bundle = Bundle().apply {
