@@ -2,6 +2,7 @@ package com.androiddevs.mvvmnewsapp.di
 
 import android.content.Context
 import androidx.room.Room
+import com.androiddevs.mvvmnewsapp.adapters.NewsAdapter
 import com.androiddevs.mvvmnewsapp.api.NewsApi
 import com.androiddevs.mvvmnewsapp.db.ArticleDao
 import com.androiddevs.mvvmnewsapp.db.ArticleDatabase
@@ -51,4 +52,8 @@ object AppModule {
     fun provideApi(
         retrofit: Retrofit
     ) = retrofit.create(NewsApi::class.java)
+
+    @Singleton
+    @Provides
+    fun provideNewsAdapter() = NewsAdapter()
 }

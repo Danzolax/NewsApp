@@ -26,7 +26,11 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
         }
     }
 
-    val differ = AsyncListDiffer(this, differCallback)
+    private val differ = AsyncListDiffer(this, differCallback)
+
+    var articles: List<Article>
+        get() = differ.currentList
+        set(value) = differ.submitList(value)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
         return ArticleViewHolder(
