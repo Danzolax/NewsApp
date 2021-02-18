@@ -23,10 +23,10 @@ interface NewsApi {
         @Query("apiKey") apiKey: String = API_KEY
     ): Response<NewsResponse>
 
-    @GET("v2/everything")
-    suspend fun getNewsBySources(
+    @GET("v2/top-headlines")
+    suspend fun getNewsByCategory(
+        @Query("category") category: String,
         @Query("page") page: Int = 1,
-        @Query("apiKey") apiKey: String = API_KEY,
-        @Query("sources") sources: String
+        @Query("apiKey") apiKey: String = API_KEY
     ): Response<NewsResponse>
 }

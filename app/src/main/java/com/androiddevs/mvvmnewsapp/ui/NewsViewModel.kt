@@ -11,7 +11,6 @@ import android.os.Build
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.androiddevs.mvvmnewsapp.NewsApplication
 import com.androiddevs.mvvmnewsapp.R
@@ -35,9 +34,26 @@ class NewsViewModel @ViewModelInject constructor(
 
     val searchNews: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
 
+    val businessNews: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
+    val entertainmentNews: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
+    val healthNews: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
+    val scienceNews: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
+    val sportNews: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
+    val techNews: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
 
     init {
         getBreakingNews("ru")
+    }
+
+    suspend fun getNewsByCategory(category: String) = newsRepository.getNewsByCategory(category)
+
+    fun getAllCategories() = viewModelScope.launch {
+        businessNews.postValue(handleNewsResponse(getNewsByCategory("business")))
+        entertainmentNews.postValue(handleNewsResponse(getNewsByCategory("entertainment")))
+        healthNews.postValue(handleNewsResponse(getNewsByCategory("health")))
+        scienceNews.postValue(handleNewsResponse(getNewsByCategory("science")))
+        sportNews.postValue(handleNewsResponse(getNewsByCategory("sports")))
+        techNews.postValue(handleNewsResponse(getNewsByCategory("technology")))
     }
 
     fun getBreakingNews(countryCode: String) = viewModelScope.launch {
@@ -48,18 +64,7 @@ class NewsViewModel @ViewModelInject constructor(
         safeSearchNewsCall(searchQuery)
     }
 
-    private fun handleBreakingNewsResponse(
-        response: Response<NewsResponse>
-    ): Resource<NewsResponse> {
-        if (response.isSuccessful) {
-            response.body()?.let { resultResponse ->
-                return Resource.Success(resultResponse)
-            }
-        }
-        return Resource.Error(response.message());
-    }
-
-    private fun handleSearchNewsResponse(
+    private fun handleNewsResponse(
         response: Response<NewsResponse>
     ): Resource<NewsResponse> {
         if (response.isSuccessful) {
@@ -100,7 +105,7 @@ class NewsViewModel @ViewModelInject constructor(
         searchNews.postValue(Resource.Loading())
         val resource = safeCall {
             val response = newsRepository.searchNews(searchQuery)
-            handleSearchNewsResponse(response)
+            handleNewsResponse(response)
         }
         searchNews.postValue(resource)
     }
@@ -110,7 +115,7 @@ class NewsViewModel @ViewModelInject constructor(
         breakingNews.postValue(Resource.Loading())
         val resource = safeCall {
             val response = newsRepository.getBreakingNews(countryCode)
-            handleBreakingNewsResponse(response)
+            handleNewsResponse(response)
         }
         breakingNews.postValue(resource)
     }

@@ -23,7 +23,7 @@ class NewsRepository @Inject constructor(
 
     suspend fun deleteArticle(article: Article) = dao.delete(article)
 
-    suspend fun getNewsBySources(
-        sources: String
-    ) = api.getNewsBySources(sources = sources)
+    suspend fun getNewsByCategory(
+        category: String
+    ) = api.getNewsByCategory(category)
 }

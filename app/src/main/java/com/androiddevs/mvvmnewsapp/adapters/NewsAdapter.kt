@@ -16,21 +16,24 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
 
     inner class ArticleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
-    private val differCallback = object : DiffUtil.ItemCallback<Article>() {
-        override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
-            return oldItem.url == newItem.url
+//    private val differCallback = object : DiffUtil.ItemCallback<Article>() {
+//        override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
+//            return oldItem.url == newItem.url
+//        }
+//
+//        override fun areContentsTheSame(oldItem: Article, newItem: Article): Boolean {
+//            return oldItem == newItem
+//        }
+//    }
+//
+//    private val differ = AsyncListDiffer(this, differCallback)
+
+    var articles: List<Article> = listOf()
+        //        get() = differ.currentList
+        set(value) {
+            field = value
+            notifyDataSetChanged()
         }
-
-        override fun areContentsTheSame(oldItem: Article, newItem: Article): Boolean {
-            return oldItem == newItem
-        }
-    }
-
-    private val differ = AsyncListDiffer(this, differCallback)
-
-    var articles: List<Article>
-        get() = differ.currentList
-        set(value) = differ.submitList(value)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
         return ArticleViewHolder(
@@ -42,10 +45,10 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
         )
     }
 
-    override fun getItemCount(): Int = differ.currentList.size
+    override fun getItemCount(): Int = articles.size
 
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
-        val article = differ.currentList[position]
+        val article = articles[position]
         holder.itemView.apply {
             Glide.with(this).load(article.urlToImage).into(ivArticleImage)
             tvSource.text = article.source?.name ?: "Text"
