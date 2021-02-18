@@ -35,7 +35,6 @@ class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setHasOptionsMenu(true)
         setupRecyclerView()
 
         newsAdapter.setOnItemClickListener {
@@ -87,7 +86,6 @@ class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news) {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.action_bar_menu, menu)
+        inflater.inflate(R.menu.action_bar_menu,menu)
     }
 }
