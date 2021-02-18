@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/news_nav_graph"
     app:startDestination="@id/breakingNewsFragment">
 
@@ -16,9 +15,6 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
-        <action
-            android:id="@+id/action_breakingNewsFragment_to_categoriesFragment"
-            app:destination="@id/categoriesFragment" />
     </fragment>
     <fragment
         android:id="@+id/articleFragment"
@@ -52,9 +48,4 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
-    <fragment
-        android:id="@+id/categoriesFragment"
-        android:name="com.androiddevs.mvvmnewsapp.ui.fragments.CategoriesFragment"
-        android:label="fragment_categories"
-        tools:layout="@layout/fragment_categories" />
 </navigation>

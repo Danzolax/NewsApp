@@ -1,11 +1,9 @@
 package com.androiddevs.mvvmnewsapp.ui.fragments
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import android.widget.AbsListView
 import android.widget.Toast
@@ -35,7 +33,6 @@ class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news) {
 
     val TAG = "BreakingNewsFragment"
 
-    @SuppressLint("LogNotTimber")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
@@ -72,8 +69,6 @@ class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news) {
                 }
             }
         })
-
-
     }
 
     private fun hideProgressBar() {
@@ -94,15 +89,5 @@ class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news) {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.action_bar_menu, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId){
-            R.id.categoriesButton ->{
-                findNavController().navigate(BreakingNewsFragmentDirections.actionBreakingNewsFragmentToCategoriesFragment())
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
     }
 }
