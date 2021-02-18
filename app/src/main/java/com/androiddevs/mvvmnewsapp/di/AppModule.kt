@@ -22,12 +22,12 @@ import javax.inject.Singleton
 @Module
 @InstallIn(ApplicationComponent::class)
 object AppModule {
-
     @Singleton
     @Provides
     fun provideArticleDatabase(
         @ApplicationContext context: Context
     ) = Room.databaseBuilder(context, ArticleDatabase::class.java, DATABASE_NAME).build()
+
 
     @Singleton
     @Provides
