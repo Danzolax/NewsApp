@@ -20,7 +20,8 @@ class CategoryViewPagerAdapter(
 
     private val allArticles = MutableList<List<Article>>(6) { listOf() }
 
-    class CategoryViewHolder(itemView: View, newsAdapter: NewsAdapter) : RecyclerView.ViewHolder(itemView) {
+    class CategoryViewHolder(itemView: View, newsAdapter: NewsAdapter) :
+        RecyclerView.ViewHolder(itemView) {
         val name: TextView = itemView.findViewById(R.id.tvCategoryName)
         val rv = itemView.findViewById<RecyclerView>(R.id.rvArticles).apply {
             adapter = newsAdapter
@@ -65,6 +66,8 @@ class CategoryViewPagerAdapter(
     override fun getItemCount(): Int {
         return names.size
     }
+
+    var listener: ((Article) -> Unit)? = null
 
     fun setBusinessArticles(newsResponse: NewsResponse) {
         allArticles[0] = newsResponse.articles
